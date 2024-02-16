@@ -1,16 +1,11 @@
 version: '3.8'
 services:
-  server:
+  mumble:
     build:
       context: .
       dockerfile: dockerfile
     environment:
-      SUPERUSER_PASSWORD: /run/secrets/superuser_password
+      SUPERUSER_PASSWORD: ${SUPERUSER_PASSWORD}
     ports:
-      - "64738:64738/tcp"
-      - "64738:64738/udp"
-    secrets:
-      - superuser_password
-secrets:
-  superuser_password:
-    file: ./secrets/password.txt
+      - "${PORTS}:${PORTS}/tcp"
+      - "${PORTS}:${PORTS}/udp"

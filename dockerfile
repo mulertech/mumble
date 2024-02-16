@@ -13,7 +13,7 @@ RUN mkdir /data \
   && chown murmur:murmur /data
 
 # Copy config
-COPY ./secrets/config.ini /data
+COPY ./config/config.ini /data
 
 # Set data dir as persistent volume
 VOLUME /data
