@@ -9,3 +9,5 @@ services:
     ports:
       - "${PORTS}:${PORTS}/tcp"
       - "${PORTS}:${PORTS}/udp"
+    volumes:
+      - ${CONFIG_PATH}:/data/config.ini
