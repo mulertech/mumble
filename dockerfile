@@ -1,5 +1,6 @@
-FROM alpine:latest
-# Setup environment
+FROM alpine:3.19
+
+# Create user and Setup environment
 RUN adduser -DHs /sbin/nologin murmur \
   && apk update \
   && apk upgrade \
@@ -11,13 +12,12 @@ RUN adduser -DHs /sbin/nologin murmur \
 RUN mkdir /data \
   && chown murmur:murmur /data
 
-# Copy config
-COPY ./secrets/config.ini /data
-
-# Set data dir as persistent volume
-VOLUME /data
-
 # Add entrypoint
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+COPY entrypoint.sh /data/entrypoint.sh
+RUN chmod +x /data/entrypoint.sh
+
+# Login
+USER murmur:murmur
+
+# Set entrypoint
+ENTRYPOINT ["/data/entrypoint.sh"]
