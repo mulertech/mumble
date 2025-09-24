@@ -4,6 +4,8 @@ services:
     build:
       context: .
       dockerfile: dockerfile
+    container_name: mumble
+    restart: unless-stopped
     environment:
       SUPERUSER_PASSWORD: ${SUPERUSER_PASSWORD}
     ports:
